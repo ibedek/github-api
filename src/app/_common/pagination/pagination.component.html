@@ -1,0 +1,52 @@
+<nav *ngIf="showPagination">
+  <ul class="pagination justify-content-center">
+
+    <li class="page-item" *ngIf="currentPage !== 1">
+      <button class="page-link" (click)="pageChange(currentPage - 1)">Previous</button>
+    </li>
+
+    <li class="page-item" [ngClass]="{active: currentPage === 1}">
+      <button class="page-link" (click)="pageChange(1)" [disabled]="currentPage === 1">1</button>
+    </li>
+
+    <li class="page-item separator" *ngIf="currentPage > 3">
+      <button class="page-link" disabled>...</button>
+    </li>
+
+    <li class="page-item" *ngIf="currentPage === totalPages && totalPages > 3">
+      <button class="page-link" (click)="pageChange(currentPage - 2)">{{currentPage - 2}}</button>
+    </li>
+
+    <li class="page-item" *ngIf="currentPage > 2">
+      <button class="page-link" (click)="pageChange(currentPage - 1)">{{currentPage - 1}}</button>
+    </li>
+
+    <li class="page-item active" *ngIf="currentPage !== 1 && currentPage !== totalPages">
+      <button class="page-link " (click)="pageChange(currentPage)">{{currentPage}}</button>
+    </li>
+
+
+    <li class="page-item" *ngIf="currentPage < totalPages - 1">
+      <button class="page-link" (click)="pageChange(currentPage +1)">{{currentPage +1}}</button>
+    </li>
+
+
+    <li class="page-item" *ngIf="currentPage === 1 && totalPages > 3">
+      <button class="page-link" (click)="pageChange(currentPage +2)">{{currentPage +2}}</button>
+    </li>
+
+
+    <li class="page-item separator" *ngIf="currentPage < totalPages -2">
+      <button class="page-link" disabled>...</button>
+    </li>
+
+    <li class="page-item" [ngClass]="{active: currentPage === totalPages}">
+      <button class="page-link" (click)="pageChange(totalPages)">{{totalPages}}</button>
+    </li>
+
+    <li class="page-item" *ngIf="currentPage !== totalPages">
+      <button class="page-link" (click)="pageChange(currentPage +1)">Next</button>
+    </li>
+
+  </ul>
+</nav>
