@@ -1,0 +1,23 @@
+<h1>Search GitHub Users</h1>
+<form [formGroup]="searchForm.form" (ngSubmit)="search()">
+
+  <div class="mb-3 input-group">
+    <input formControlName="q" placeholder="Write username and hit search!" type="text" class="form-control" aria-describedby="userHelp">
+    <button class="btn btn-primary" type="submit" >Go</button>
+  </div>
+</form>
+
+<h3 *ngIf="totalResults > 0">Results:</h3>
+<div class="list-group" *ngIf="formSubmitted">
+  <a (click)="openDetails(item)" *ngFor="let item of usersSearchResults" class="list-group-item list-group-item-action">{{item.login}}</a>
+
+  <div class="alert alert-danger" role="alert" *ngIf="errorMessage.length > 0">
+    {{errorMessage}}
+  </div>
+
+  <div class="alert alert-warning" role="alert" *ngIf="totalResults === 0">
+    No results found. Please try with another search query
+  </div>
+</div>
+
+<h6 class="mt-3" *ngIf="totalResults > 0">Total count: {{totalResults}}</h6>
