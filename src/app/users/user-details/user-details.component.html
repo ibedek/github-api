@@ -1,0 +1,36 @@
+<div class="card mt-3" *ngIf="user">
+
+  <div class="card-header">
+    {{user.login}}s' Details
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-12 col-md-4">
+
+        <img [src]="user.avatar_url" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{user.name}}</h5>
+          <p class="card-text">{{user.bio || 'Biography not found'}}</p>
+        </div>
+
+        <a (click)="goBack()" class="btn btn-primary mb-4">Go back</a>
+
+      </div>
+
+      <div class="col-sm-12 col-md-8">
+        <h6>Followers:</h6>
+        <app-user-followers [followers]="followers"></app-user-followers>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-4">
+      </div>
+
+      <div class="col-sm-12 col-md-8">
+        <app-pagination [totalResults]="user.followers" [currentPage]="currentPage" (pageEvent)="onPageEvent($event)"></app-pagination>
+      </div>
+    </div>
+  </div>
+
+</div>
