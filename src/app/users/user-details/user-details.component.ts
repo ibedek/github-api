@@ -32,14 +32,6 @@ export class UserDetailsComponent implements OnDestroy {
     });
   }
 
-  init(): void {
-    this.login = this.route.snapshot.paramMap.get('login');
-    this.userSubscription = this.ghUserService
-      .GetUserDetails(this.login?.toString() ?? '')
-      .subscribe((r) => (this.user = r));
-    this.loadFollowers();
-  }
-
   ngOnDestroy(): void {
     if (this.userSubscription) {
       this.userSubscription.unsubscribe();
@@ -52,6 +44,17 @@ export class UserDetailsComponent implements OnDestroy {
     if (this.routerSubscription) {
       this.routerSubscription.unsubscribe();
     }
+  }
+
+  init(): void {
+    this.login = this.route.snapshot.paramMap.get('login');
+    this.userSubscription = this.ghUserService
+      .GetUserDetails(this.login?.toString() ?? '')
+      .subscribe((r) => {
+        this.user = r;
+        this.currentPage = 1;
+        this.loadFollowers();
+      });
   }
 
   onPageEvent(pageEvent: PageEventModel): void {

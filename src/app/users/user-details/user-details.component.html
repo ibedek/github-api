@@ -17,7 +17,7 @@
 
       </div>
 
-      <div class="col-sm-12 col-md-8">
+      <div class="col-sm-12 col-md-8" *ngIf="followers.length > 0">
         <h6>Followers:</h6>
         <app-user-followers [followers]="followers"></app-user-followers>
       </div>
